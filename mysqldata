@@ -1,0 +1,21 @@
+CREATE DATABASE logistics;
+
+USE logistics;
+
+CREATE TABLE Trucks (
+    truck_id INT AUTO_INCREMENT PRIMARY KEY,
+    license_plate VARCHAR(20) NOT NULL,
+    driver_name VARCHAR(100),
+    product_type VARCHAR(50),
+    arrival_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    unloading_time TIMESTAMP NULL
+);
+
+CREATE TABLE UnloadRecords (
+    record_id INT AUTO_INCREMENT PRIMARY KEY,
+    truck_id INT,
+    product_type VARCHAR(50),
+    quantity DECIMAL(10, 2),
+    unloading_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (truck_id) REFERENCES Trucks(truck_id)
+);
