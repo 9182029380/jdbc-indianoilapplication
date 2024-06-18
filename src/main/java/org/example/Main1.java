@@ -1,32 +1,32 @@
 package org.example;
 
 // Define a sealed interface for Bank
-sealed interface Bank permits FixedDepositAccount1, Loan, SavingsAccount {
+// Define a sealed interface for Bank
+sealed interface Bank1 permits SavingsAccount1, FixedDeposit1 {
     // No implementation needed
 }
 
 // Define a sealed interface for SavingsAccount
-sealed interface SavingsAccount extends Bank permits HighInterestSavingsAccount, LowInterestSavingsAccount {
+sealed interface SavingsAccount1 extends Bank1 permits HighInterestSavingsAccount1, LowInterestSavingsAccount1 {
     // No implementation needed
 }
 
 // Define a sealed interface for HighInterestSavingsAccount
-sealed interface HighInterestSavingsAccount extends SavingsAccount permits HighInterestSavingsAccountForStudents {
+sealed interface HighInterestSavingsAccount1 extends SavingsAccount1 permits HighInterestSavingsAccountForStudents1 {
     // No implementation needed
 }
 
-// Define a sealed interface for FixedDepositAccount
-sealed interface FixedDepositAccount1 extends Bank permits FixedDepositAccount {
-    void showDepositAccount();
+// Define a sealed interface for FixedDeposit
+sealed interface FixedDeposit1 extends Bank1 {
     // No implementation needed
 }
 
 // Define a final class for HighInterestSavingsAccountForStudents
-non-sealed class HighInterestSavingsAccountForStudents implements HighInterestSavingsAccount {
+final class HighInterestSavingsAccountForStudents1 implements HighInterestSavingsAccount1 {
     private String accountNumber;
     private double balance;
 
-    public HighInterestSavingsAccountForStudents(String accountNumber, double balance) {
+    public HighInterestSavingsAccountForStudents1(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
@@ -41,11 +41,11 @@ non-sealed class HighInterestSavingsAccountForStudents implements HighInterestSa
 }
 
 // Define a final class for LowInterestSavingsAccount
-final class LowInterestSavingsAccount implements SavingsAccount {
+final class LowInterestSavingsAccount1 implements SavingsAccount1 {
     private String accountNumber;
     private double balance;
 
-    public LowInterestSavingsAccount(String accountNumber, double balance) {
+    public LowInterestSavingsAccount1(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
@@ -60,12 +60,12 @@ final class LowInterestSavingsAccount implements SavingsAccount {
 }
 
 // Define a final class for FixedDepositAccount
-final class FixedDepositAccount implements FixedDepositAccount1 {
+final class FixedDepositAccount11 implements FixedDeposit1 {
     private String accountNumber;
     private double balance;
     private int tenure;
 
-    public FixedDepositAccount(String accountNumber, double balance, int tenure) {
+    public FixedDepositAccount11(String accountNumber, double balance, int tenure) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.tenure = tenure;
@@ -82,20 +82,15 @@ final class FixedDepositAccount implements FixedDepositAccount1 {
     public int getTenure() {
         return tenure;
     }
-
-    @Override
-    public void showDepositAccount() {
-        System.out.println("This is a Fixed Deposit Account");
-    }
 }
 
 // Example usage
-public class Main {
+public class Main1 {
     public static void main(String[] args) {
         // Create instances of permitted classes
-        HighInterestSavingsAccountForStudents highInterestSavingsAccountForStudents = new HighInterestSavingsAccountForStudents("1234567890", 1000.0);
-        LowInterestSavingsAccount lowInterestSavingsAccount = new LowInterestSavingsAccount("9876543210", 500.0);
-        FixedDepositAccount fixedDepositAccount = new FixedDepositAccount("1111111111", 2000.0, 5);
+        HighInterestSavingsAccountForStudents1 highInterestSavingsAccountForStudents = new HighInterestSavingsAccountForStudents1("1234567890", 1000.0);
+        LowInterestSavingsAccount1 lowInterestSavingsAccount = new LowInterestSavingsAccount1("9876543210", 500.0);
+        FixedDepositAccount11 fixedDepositAccount = new FixedDepositAccount11("1111111111", 2000.0, 5);
 
         // Perform operations on the instances
         System.out.println("High Interest Savings Account for Students:");
